@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>BuildMate</title><meta name="theme-color" content="#3b5bdb"><meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--tx:#14213d;--mut:#6b7691;--pri:#3b5bdb;--pri2:#7048e8;--ok:#2f9e44;--bad:#e03131;--bd:#e3e8f2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1424;--card:#171f36;--tx:#eef1fb;--mut:#9aa5c4;--bd:#273252;--pri:#748ffc}}
+:root[data-theme="dark"]{--bg:#0e1424;--card:#171f36;--tx:#eef1fb;--mut:#9aa5c4;--bd:#273252;--pri:#748ffc}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column}
+header{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;padding:16px 18px 20px;border-radius:0 0 22px 22px}
+header h1{margin:0;font-size:20px}header p{margin:2px 0 0;opacity:.85;font-size:13px}
+main{flex:1;overflow-y:auto;padding:14px 14px 90px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(20,33,61,.05)}
+h2{font-size:16px;margin:0 0 10px}h3{font-size:14px;margin:0 0 6px}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{font-size:12px;color:var(--mut);display:block;margin-bottom:3px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
+button,.btn{background:var(--pri);color:#fff;border:0;border-radius:12px;padding:11px 16px;font:600 14px inherit;cursor:pointer;text-decoration:none;display:inline-block;text-align:center}
+button.s,.btn.s{background:var(--bg);color:var(--pri);border:1px solid var(--bd)}button.x{background:none;color:var(--bad);padding:4px 8px}
+.full{width:100%;margin-top:10px}.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.big{font-size:22px;font-weight:700}.mut{color:var(--mut);font-size:12px}
+.res div.r{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--bd)}.res b{font-variant-numeric:tabular-nums}
+.warn{background:#fff3bf;color:#5f3b00;border-radius:10px;padding:8px 10px;margin-top:8px;font-size:13px}
+.bar{height:10px;border-radius:6px;background:var(--bd);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--pri),var(--pri2))}
+nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--bd);display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;background:none;color:var(--mut);font-size:11px;padding:6px 0;border-radius:10px}
+nav button.on{color:var(--pri);background:var(--bg)}nav span{display:block;font-size:20px}
+.chk{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd)}.chk input{width:20px;height:20px}
+.pill{font-size:11px;padding:2px 8px;border-radius:99px;background:var(--bg);color:var(--mut)}
+.gantt{overflow-x:auto}.gt{position:relative;height:26px;margin:4px 0;background:var(--bg);border-radius:6px;min-width:100%}.gt i{position:absolute;top:3px;bottom:3px;border-radius:5px;background:linear-gradient(90deg,var(--pri),var(--pri2));opacity:.9}
+.hide{display:none}
+@media print{html,body{height:auto}header,nav,main>section:not(.pp),.noprint,button,.btn{display:none!important}main{overflow:visible;padding:0}body{display:block;background:#fff;color:#000}.card{box-shadow:none;break-inside:avoid}}
+</style></head><body>
+<header><h1>🏗️ BuildMate</h1><p>Mix design · Schedule · Cost · Permits · Engineers</p></header>
+<main id="m">
+
+<section id="t0">
+<div class="card noprint"><h2>Concrete Mix Design <span class="pill">IS 10262:2019 / IS 456</span></h2>
+<div class="g">
+<div><label>Grade</label><select id="gr"><option>20</option><option selected>25</option><option>30</option><option>35</option><option>40</option><option>45</option><option>50</option></select></div>
+<div><label>Exposure (IS 456)</label><select id="ex"><option value="0">Mild</option><option value="1" selected>Moderate</option><option value="2">Severe</option><option value="3">Very severe</option><option value="4">Extreme</option></select></div>
+<div><label>Cement</label><select id="ce"><option value=".85">OPC 33</option><option value="1" selected>OPC 43</option><option value="1.15">OPC 53</option></select></div>
+<div><label>Max aggregate (mm)</label><select id="ms"><option>10</option><option selected>20</option><option>40</option></select></div>
+<div><label>Slump (mm)</label><input id="sl" type="number" value="100"></div>
+<div><label>Sand zone (FA)</label><select id="zn"><option value="0">Zone I</option><option value="1" selected>Zone II</option><option value="2">Zone III</option><option value="3">Zone IV</option></select></div>
+<div><label>Sp. gr. cement</label><input id="sgc" type="number" step=".01" value="3.15"></div>
+<div><label>Sp. gr. fine agg.</label><input id="sgf" type="number" step=".01" value="2.65"></div>
+<div><label>Sp. gr. coarse agg.</label><input id="sgk" type="number" step=".01" value="2.70"></div>
+<div><label>Superplasticizer % cement</label><input id="sp" type="number" step=".1" value="0"></div>
+<div><label>Batch volume (m³)</label><input id="vol" type="number" step=".1" value="1"></div>
+<div><label>Sand moisture %</label><input id="mf" type="number" step=".1" value="2"></div><div><label>Sand absorption %</label><input id="af" type="number" step=".1" value="1"></div>
+<div><label>Aggregate moisture %</label><input id="mc" type="number" step=".1" value="0.5"></div><div><label>Aggregate absorption %</label><input id="ac" type="number" step=".1" value="0.5"></div></div>
+<button class="full" onclick="mix()">Calculate mix</button></div>
+<div id="mo"></div></section>
+
+<section id="t1" class="hide">
+<div class="card noprint"><h2>Add task</h2><div class="g">
+<div style="grid-column:1/3"><label>Task</label><input id="tn" placeholder="e.g. Footing excavation"></div>
+<div><label>Start</label><input id="ts" type="date"></div><div><label>Days</label><input id="td" type="number" value="5"></div></div>
+<button class="full" onclick="addT()">Add to schedule</button></div>
+<div id="tl"></div><button class="full s" onclick="pdf('t1')">📄 Download schedule (PDF)</button></section>
+
+<section id="t2" class="hide">
+<div class="card"><h2>Project budget</h2><div class="g"><div><label>Total budget (₹)</label><input id="bud" type="number" oninput="S.bud=+this.value;sv();rc()"></div><div><label>GST %</label><input id="gst" type="number" step=".1" oninput="S.gst=+this.value;sv();rc()"></div></div>
+<div id="cs" style="margin-top:12px"></div></div>
+<div class="card noprint"><h2>Add cost item</h2><div class="g">
+<div style="grid-column:1/3"><label>Item</label><input id="cn" placeholder="e.g. Cement"></div>
+<div><label>Qty</label><input id="cq" type="number"></div><div><label>Unit</label><input id="cu" placeholder="bag / m³ / day"></div>
+<div><label>Rate (₹)</label><input id="cr" type="number"></div><div><label>Actual spent (₹)</label><input id="ca" type="number"></div></div>
+<button class="full" onclick="addC()">Add item</button></div>
+<div class="card noprint"><h2>RCC quantity takeoff</h2><div class="g">
+<div><label>Element</label><select id="rk" onchange="rkS()"><option value="80">Footing</option><option value="200">Column</option><option value="150">Beam</option><option value="90">Slab</option><option value="60">Plinth beam</option></select></div>
+<div><label>Nos.</label><input id="rn" type="number" value="1"></div>
+<div><label>Length (m)</label><input id="rl" type="number" step=".01"></div><div><label>Width (m)</label><input id="rw" type="number" step=".01"></div>
+<div><label>Depth / thickness (m)</label><input id="rt" type="number" step=".01"></div><div><label>Steel (kg/m³)</label><input id="rs" type="number" value="80"></div>
+<div><label>Concrete ₹/m³</label><input id="rcp" type="number" value="6500"></div><div><label>Steel ₹/kg</label><input id="rsp" type="number" value="72"></div></div>
+<div id="ro" class="mut" style="margin-top:8px">Steel kg/m³ is a typical value; edit it from your bar bending schedule.</div><button class="full" onclick="rcc()">Add concrete + steel to costs</button></div>
+<div id="cl"></div><button class="full s" onclick="pdf('t2')">📄 Download cost report (PDF)</button></section>
+
+<section id="t3" class="hide">
+<div class="card"><h2>Building permission email</h2><div class="g">
+<div style="grid-column:1/3"><label>Authority email (municipality / panchayat)</label><input id="pe" type="email" placeholder="commissioner@city.gov.in"></div>
+<div><label>Owner name</label><input id="po"></div><div><label>Your email (CC copy)</label><input id="pc" type="email"></div>
+<div><label>Plot / Khasra no.</label><input id="pp"></div><div><label>Built-up area (m²)</label><input id="pa" type="number"></div>
+<div style="grid-column:1/3"><label>Site address</label><input id="pd"></div></div>
+<h3 style="margin-top:14px">Documents attached</h3><div id="dc"></div>
+<button class="full" onclick="permit()">✉️ Compose & record email</button>
+<p class="mut">Opens your email app with a ready message. Attach files there; CC keeps a copy in your inbox, and the app logs it below.</p></div>
+<div id="ml"></div></section>
+
+<section id="t4" class="hide">
+<div class="card"><h2>Your project brief</h2><div class="g">
+<div><label>Scope</label><select id="es"><option>Residential building design</option><option>Structural audit / retrofit</option><option>Foundation design</option><option>Commercial / RCC frame</option><option>Drawing vetting</option></select></div>
+<div><label>Floors</label><input id="ef" type="number" value="2"></div>
+<div><label>Area (m²)</label><input id="ea" type="number"></div><div><label>Budget (₹)</label><input id="eb" type="number"></div>
+<div style="grid-column:1/3"><label>Location & deadline</label><input id="el" placeholder="Tezpur, Assam · within 3 weeks"></div></div></div>
+<div class="card"><h2>Add a structural engineer</h2><div class="g">
+<div><label>Name</label><input id="gn"></div><div><label>Email</label><input id="ge" type="email"></div>
+<div><label>Phone</label><input id="gp"></div><div><label>Fee (₹ / m²)</label><input id="gf" type="number"></div></div>
+<button class="full" onclick="addE()">Save engineer</button></div>
+<div id="el2"></div></section>
+<section id="t5" class="hide">
+<div class="card noprint"><h2>Material rates (₹)</h2><div class="g"><div><label>Brick / nos</label><input id="rb" type="number" value="9"></div><div><label>Cement / bag</label><input id="rcm" type="number" value="400"></div><div><label>Sand / m³</label><input id="rsd" type="number" value="1200"></div><div><label>Steel / kg</label><input id="rst" type="number" value="72"></div></div></div>
+<div class="card noprint"><h2>Bar bending schedule <span class="pill">IS 2502</span></h2><div class="g">
+<div style="grid-column:1/3"><label>Member</label><input id="bm" placeholder="e.g. Beam B1 bottom bars"></div>
+<div><label>Shape</label><select id="bsh"><option value="s">Straight</option><option value="h">Straight + 2 hooks</option><option value="r">Rect. stirrup</option></select></div>
+<div><label>Dia (mm)</label><select id="bd"><option>8</option><option selected>10</option><option>12</option><option>16</option><option>20</option><option>25</option></select></div>
+<div><label>Nos. of bars</label><input id="bn" type="number" value="4"></div><div><label>Length / A (mm)</label><input id="bl" type="number" value="3000"></div>
+<div><label>B (mm, stirrup only)</label><input id="bb" type="number"></div></div>
+<p class="mut">Stirrup: A, B = clear dimensions after cover; cut length = 2(A+B)+20d. Hooks add 9d each.</p>
+<button class="full" onclick="addB()">Add bar</button></div>
+<div id="bo"></div>
+<div class="card noprint"><h2>Brick masonry</h2><div class="g">
+<div><label>Wall length (m)</label><input id="wl" type="number" step=".01"></div><div><label>Wall height (m)</label><input id="wh" type="number" step=".01" value="3"></div>
+<div><label>Thickness</label><select id="wt"><option value=".115">115 mm</option><option value=".23" selected>230 mm</option></select></div><div><label>Openings (m²)</label><input id="wo" type="number" value="0"></div>
+<div><label>Brick size</label><select id="wb"><option value="0">Standard 230×110×70</option><option value="1">Modular 190×90×90</option></select></div><div><label>Mortar</label><select id="wm"><option value="4">1:4</option><option value="6" selected>1:6</option></select></div></div>
+<button class="full" onclick="brick()">Calculate bricks & mortar</button></div>
+<div id="wo2"></div>
+<div class="card noprint"><h2>Plaster</h2><div class="g"><div><label>Area (m²)</label><input id="pa2" type="number"></div><div><label>Thickness (mm)</label><select id="pt"><option>12</option><option selected>15</option><option>20</option></select></div>
+<div><label>Mix</label><select id="pm"><option value="4">1:4</option><option value="6" selected>1:6</option></select></div><div style="display:flex;align-items:end"><button class="s" style="width:100%" onclick="$('pa2').value=wallA*2||''">Wall area × 2 faces</button></div></div>
+<button class="full" onclick="plaster()">Calculate plaster</button></div>
+<div id="po2"></div>
+<button class="full s" onclick="pdf('t5')">📄 Download quantity report (PDF)</button></section>
+</main>
+<nav id="nv"></nav>
+<script>
+const $=i=>document.getElementById(i),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),f=(n,d=0)=>(+n).toLocaleString('en-IN',{maximumFractionDigits:d});
+let S={tasks:[],costs:[],mails:[],engs:[],docs:{},bud:0};
+try{S=Object.assign(S,JSON.parse(localStorage.getItem('bm')||'{}'))}catch(e){}
+const sv=()=>{try{localStorage.setItem('bm',JSON.stringify(S))}catch(e){}};
+const T=[['🧱','Mix'],['📅','Plan'],['💰','Cost'],['📄','Permit'],['👷','Engineer'],['📐','Qty']];
+$('nv').innerHTML=T.map((t,i)=>`<button id="n${i}" onclick="go(${i})"><span>${t[0]}</span>${t[1]}</button>`).join('');
+function go(i){T.forEach((_,k)=>{$('t'+k).classList.toggle('hide',k!=i);$('n'+k).classList.toggle('on',k==i)});$('m').scrollTop=0}
+/* MIX DESIGN */
+function mix(){
+const g=+$('gr').value,sd={20:4,25:4}[g]||5,ft=g+1.65*sd,k=+$('ce').value,ms=$('ms').value,zn=+$('zn').value;
+const EX=[[.55,300],[.5,300],[.45,320],[.45,340],[.4,360]][+$('ex').value];
+let wS=Math.log10(135*k/ft);wS=Math.min(.7,Math.max(.3,wS));
+let wc=Math.min(wS,EX[0]);wc=Math.floor(wc*100)/100;
+const sl=+$('sl').value,sp=+$('sp').value;
+let w={10:208,20:186,40:165}[ms]*(1+.03*Math.max(0,(sl-50)/25));if(sp>0)w*=.8;
+let c=Math.max(w/wc,EX[1]);const a=wc;wc=w/c;const warn=[];
+if(c>450)warn.push('Cement exceeds 450 kg/m³ (IS 456 limit). Use a higher grade of cement, lower slump or admixture.');
+if(c==EX[1]&&w/wc<0)0;
+let cav={10:[.46,.48,.50,.52],20:[.60,.62,.64,.66],40:[.69,.71,.73,.75]}[ms][zn]+(0.5-wc)/.05*.01;
+const air={10:.015,20:.01,40:.008}[ms],vc=c/(+$('sgc').value*1000),vw=w/1000,va=c*sp/100/1080,vg=1-air-vc-vw-va;
+const ca=vg*cav*+$('sgk').value*1000,fa=vg*(1-cav)*+$('sgf').value*1000,v=+$('vol').value||1;
+if(g<[20,25,30,35,40][+$('ex').value])warn.push('Grade is below the minimum IS 456 grade for this exposure.');
+const R=(l,x,u)=>`<div class="r"><span>${l}</span><b>${x}${u?' '+u:''}</b></div>`;
+const mf=+$('mf').value,af=+$('af').value,mc=+$('mc').value,ac=+$('ac').value,fF=fa*(1+(mf-af)/100)*v,cF=ca*(1+(mc-ac)/100)*v,wF=(w-fa*(mf-af)/100-ca*(mc-ac)/100)*v;
+$('mo').innerHTML=`<div class="card res"><h2>M${g} mix proportions per m³ (SSD) · ${new Date().toLocaleDateString('en-IN')}</h2>
+<div class="big" style="color:var(--pri)">1 : ${(fa/c).toFixed(2)} : ${(ca/c).toFixed(2)}</div><div class="mut">cement : sand : aggregate (w/c ${wc.toFixed(2)})</div>
+${R('Target mean strength',f(ft,1),'MPa')}${R('Water',f(w),'kg')}${R('Cement',f(c),'kg')}${R('Fine aggregate',f(fa),'kg')}${R('Coarse aggregate',f(ca),'kg')}${sp>0?R('Admixture',f(c*sp/100,1),'kg'):''}
+<h3 style="margin-top:12px">For ${v} m³</h3>${R('Cement',f(c*v)+' kg ('+f(c*v/50,1)+' bags)')}${R('Sand',f(fa*v),'kg')}${R('Aggregate',f(ca*v),'kg')}${R('Water',f(w*v),'L')}<h3 style="margin-top:12px">Field batch, moisture-corrected (${v} m³)</h3>${R('Sand',f(fF),'kg')}${R('Aggregate',f(cF),'kg')}${R('Water to add',f(wF),'L')}
+${warn.map(x=>`<div class="warn">⚠️ ${x}</div>`).join('')}
+<p class="mut">Indicative design (target strength = fck + 1.65s). Confirm with trial mixes before use.</p><button class="full s" onclick="pdf('t0')">📄 Download PDF / Print</button>
+<button class="full s" onclick="mixCost(${c*v},${fF},${cF})">➕ Add materials to cost list</button></div>`}
+function mixCost(c,fa,ca){[['Cement',c/50,'bag',400],['Sand',fa/1000,'tonne',1200],['Coarse aggregate',ca/1000,'tonne',1100]].forEach(x=>S.costs.push({n:x[0],q:+x[1].toFixed(2),u:x[2],r:x[3],a:0}));sv();rc();go(2)}
+/* SCHEDULE */
+const D=d=>new Date(d+'T00:00:00'),fd=d=>d.toLocaleDateString('en-IN',{day:'2-digit',month:'short'}),ad=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+$('ts').valueAsDate=new Date();
+function addT(){if(!$('tn').value||!$('ts').value)return;S.tasks.push({n:$('tn').value,s:$('ts').value,d:+$('td').value||1,p:0});$('tn').value='';sv();rt()}
+function rt(){const L=S.tasks;if(!L.length){$('tl').innerHTML='<p class="mut" style="text-align:center">No tasks yet.</p>';return}
+const mn=Math.min(...L.map(t=>+D(t.s))),mx=Math.max(...L.map(t=>+ad(D(t.s),t.d))),sp=mx-mn||1;
+$('tl').innerHTML=`<div class="card"><div class="row"><h2>Timeline</h2><span class="pill">Ends ${fd(new Date(mx))}</span></div><div class="gantt">`+L.map(t=>`<div class="mut">${esc(t.n)}</div><div class="gt"><i style="left:${(+D(t.s)-mn)/sp*100}%;width:${Math.max(3,t.d*864e5/sp*100)}%"></i></div>`).join('')+`</div></div>`+
+L.map((t,i)=>`<div class="card"><div class="row"><h3>${esc(t.n)}</h3><button class="x" onclick="S.tasks.splice(${i},1);sv();rt()">✕</button></div><div class="mut">${fd(D(t.s))} → ${fd(ad(D(t.s),t.d))} · ${t.d} days</div><div class="bar" style="margin:8px 0"><i style="width:${t.p}%"></i></div><div class="row"><input type="range" value="${t.p}" oninput="S.tasks[${i}].p=+this.value;sv();this.nextElementSibling.textContent=this.value+'%'"><b>${t.p}%</b></div></div>`).join('')}
+/* COST */
+function addC(){if(!$('cn').value)return;S.costs.push({n:$('cn').value,q:+$('cq').value||0,u:$('cu').value,r:+$('cr').value||0,a:+$('ca').value||0});['cn','cq','cu','cr','ca'].forEach(i=>$(i).value='');sv();rc()}
+function rc(){const e0=S.costs.reduce((a,c)=>a+c.q*c.r,0),gs=e0*(S.gst??18)/100,est=e0+gs,act=S.costs.reduce((a,c)=>a+c.a,0),b=S.bud||0;$('bud').value=b||'';
+$('cs').innerHTML=`<div class="row"><div><div class="mut">Total incl. GST</div><div class="big">₹${f(est)}</div></div><div><div class="mut">Spent</div><div class="big">₹${f(act)}</div></div></div><div class="mut" style="margin-top:6px">Base ₹${f(e0)} + GST ₹${f(gs)}</div>${b?`<div class="bar" style="margin-top:10px"><i style="width:${Math.min(100,est/b*100)}%;${est>b?'background:var(--bad)':''}"></i></div><div class="mut">${est>b?'Over budget by ₹'+f(est-b):'₹'+f(b-est)+' remaining'}</div>`:''}`;
+$('cl').innerHTML=S.costs.map((c,i)=>`<div class="card row"><div><h3>${esc(c.n)}</h3><div class="mut">${c.q} ${esc(c.u)} × ₹${f(c.r)} = <b>₹${f(c.q*c.r)}</b><br>Spent ₹${f(c.a)}</div></div><button class="x" onclick="S.costs.splice(${i},1);sv();rc()">✕</button></div>`).join('')}
+/* PERMIT */
+const DOCS=['Application form (signed)','Ownership / sale deed','Land tax receipt / Patta / Jamabandi','Approved building plan (3 sets)','Structural design & stability certificate','Soil test report','ID & address proof of owner','Licensed engineer / architect registration','NOC (fire / airport / water if applicable)','Site photographs'];
+function rd(){$('dc').innerHTML=DOCS.map((d,i)=>`<label class="chk" style="font-size:14px;color:var(--tx)"><input type="checkbox" ${S.docs[i]?'checked':''} onchange="S.docs[${i}]=this.checked;sv()">${d}</label>`).join('')}
+function mail(to,cc,sub,body){const a=document.createElement('a');a.href=`mailto:${encodeURIComponent(to)}?${cc?'cc='+encodeURIComponent(cc)+'&':''}subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`;a.target='_blank';document.body.appendChild(a);a.click();a.remove()}
+function permit(){const to=$('pe').value;if(!to){alert('Enter the authority email');return}
+const sub=`Application for Building Permission – Plot ${$('pp').value||'—'}`,dl=DOCS.filter((_,i)=>S.docs[i]).map((d,i)=>`${i+1}. ${d}`).join('\n')||'(attached separately)';
+const body=`To,\nThe Competent Authority\n\nSubject: ${sub}\n\nRespected Sir/Madam,\n\nI, ${$('po').value||'[Owner]'}, request permission to construct a building on Plot ${$('pp').value||'—'}, ${$('pd').value||'[address]'}, with built-up area ${$('pa').value||'—'} m².\n\nEnclosed documents:\n${dl}\n\nKindly acknowledge receipt and inform me of any further requirements or inspection dates.\n\nYours faithfully,\n${$('po').value}`;
+S.mails.unshift({d:new Date().toISOString().slice(0,16).replace('T',' '),to,sub,st:'Sent – awaiting reply'});sv();rm();mail(to,$('pc').value,sub,body)}
+function rm(){$('ml').innerHTML=S.mails.length?'<h2>Email record</h2>'+S.mails.map((m,i)=>`<div class="card"><div class="row"><h3>${esc(m.sub)}</h3><button class="x" onclick="S.mails.splice(${i},1);sv();rm()">✕</button></div><div class="mut">${m.d} → ${esc(m.to)}</div><select onchange="S.mails[${i}].st=this.value;sv()" style="margin-top:8px">${['Sent – awaiting reply','Reply received','Objection raised','Approved'].map(o=>`<option ${o==m.st?'selected':''}>${o}</option>`).join('')}</select></div>`).join(''):''}
+/* ENGINEERS */
+function addE(){if(!$('gn').value)return;S.engs.push({n:$('gn').value,e:$('ge').value,p:$('gp').value,f:+$('gf').value||0});['gn','ge','gp','gf'].forEach(i=>$(i).value='');sv();re()}
+function re(){$('el2').innerHTML=S.engs.map((g,i)=>`<div class="card"><div class="row"><h3>👷 ${esc(g.n)}</h3><button class="x" onclick="S.engs.splice(${i},1);sv();re()">✕</button></div><div class="mut">${esc(g.e)} · ${esc(g.p)}${g.f?' · ₹'+f(g.f)+'/m²':''}</div><div class="row" style="margin-top:10px;gap:8px">${g.p?`<a class="btn s" style="flex:1" href="tel:${esc(g.p)}">Call</a>`:''}<button style="flex:1" onclick="hire(${i})">Request proposal</button></div></div>`).join('')||'<p class="mut" style="text-align:center">Add engineers you know or shortlist from local listings, then email each one the same brief.</p>'}
+function hire(i){const g=S.engs[i];if(!g.e){alert('Add an email for this engineer');return}
+mail(g.e,'',`Structural engineering enquiry – ${$('es').value}`,`Dear ${g.n},\n\nI would like a proposal for: ${$('es').value}.\nFloors: ${$('ef').value||'—'}\nBuilt-up area: ${$('ea').value||'—'} m²\nLocation / deadline: ${$('el').value||'—'}\nBudget: ₹${$('eb').value||'—'}\n\nPlease share your fee, timeline, deliverables (drawings, calculations, stability certificate) and relevant past work. Registration/licence number would also be appreciated.\n\nThank you.`);
+S.mails.unshift({d:new Date().toISOString().slice(0,16).replace('T',' '),to:g.e,sub:'Engineer enquiry – '+g.n,st:'Sent – awaiting reply'});sv();rm()}
+function rkS(){$('rs').value=$('rk').value}
+function rcc(){const n=+$('rn').value||1,v=n*(+$('rl').value)*(+$('rw').value)*(+$('rt').value),st=v*(+$('rs').value),nm=$('rk').selectedOptions[0].text;if(!v){alert('Enter dimensions');return}
+S.costs.push({n:`Concrete – ${nm} ×${n}`,q:+v.toFixed(2),u:'m³',r:+$('rcp').value||0,a:0},{n:`Steel – ${nm} ×${n}`,q:Math.round(st),u:'kg',r:+$('rsp').value||0,a:0});sv();rc();$('ro').textContent=`Added: ${v.toFixed(2)} m³ concrete, ${f(st)} kg steel`}
+function pdf(id){const e=$(id);e.classList.add('pp');try{window.print()}catch(x){alert('Use browser menu → Print → Save as PDF')}e.classList.remove('pp')}
+try{if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}
+S.bbs=S.bbs||[];let wallA=0;
+const RR=(l,x,u)=>`<div class="r"><span>${l}</span><b>${x} ${u}</b></div>`;
+function addB(){const sh=$('bsh').value,d=+$('bd').value,n=+$('bn').value,L=+$('bl').value,B=+$('bb').value;if(!n||!L||(sh=='r'&&!B)){alert('Enter bars and dimensions');return}
+const cut=sh=='s'?L:sh=='h'?L+18*d:2*(L+B)+20*d;S.bbs.push({m:$('bm').value||'Member',sh,d,n,cut});sv();rb()}
+function rb(){const L=S.bbs;if(!L.length){$('bo').innerHTML='';return}const W=b=>b.cut/1000*b.n*b.d*b.d/162,by={};L.forEach(b=>by[b.d]=(by[b.d]||0)+W(b));const tot=Object.values(by).reduce((a,b)=>a+b,0),nm={s:'Straight',h:'Hooked',r:'Stirrup'};
+$('bo').innerHTML=`<div class="card res"><h2>Bar bending schedule</h2><div class="gantt"><table style="width:100%;border-collapse:collapse;font-size:13px"><tr class="mut"><td>Member</td><td>Ø</td><td>Nos</td><td>Cut mm</td><td>kg</td><td></td></tr>`+L.map((b,i)=>`<tr style="border-top:1px dashed var(--bd)"><td>${esc(b.m)}<br><span class="mut">${nm[b.sh]}</span></td><td>${b.d}</td><td>${b.n}</td><td>${f(b.cut)}</td><td><b>${f(W(b),1)}</b></td><td><button class="x" onclick="S.bbs.splice(${i},1);sv();rb()">✕</button></td></tr>`).join('')+`</table></div>`+Object.keys(by).sort((a,b)=>a-b).map(d=>RR('Total Ø'+d+' mm',f(by[d],1),'kg')).join('')+RR('Grand total (+3% wastage)',f(tot*1.03,1),'kg')+`<button class="full s" onclick="steelC(${tot*1.03})">➕ Add steel to cost list</button></div>`}
+function steelC(w){S.costs.push({n:'Steel (BBS)',q:Math.round(w),u:'kg',r:+$('rst').value||0,a:0});sv();rc();go(2)}
+function matC(nm,b,c,s){if(b)S.costs.push({n:'Bricks – '+nm,q:b,u:'nos',r:+$('rb').value||0,a:0});S.costs.push({n:'Cement – '+nm,q:+c.toFixed(1),u:'bag',r:+$('rcm').value||0,a:0},{n:'Sand – '+nm,q:+s.toFixed(2),u:'m³',r:+$('rsd').value||0,a:0});sv();rc();go(2)}
+function brick(){const l=+$('wl').value,h=+$('wh').value,t=+$('wt').value,op=+$('wo').value||0,m=+$('wm').value;if(!l||!h){alert('Enter wall length and height');return}
+const A=Math.max(0,l*h-op);wallA=A;const V=A*t,z=$('wb').value=='0'?[.23,.11,.07,.24,.12,.08]:[.19,.09,.09,.2,.1,.1],nos=V/(z[3]*z[4]*z[5]),dry=(V-nos*z[0]*z[1]*z[2])*1.27,c=dry/(1+m)*1440/50,sd=dry*m/(1+m),bn=Math.ceil(nos*1.05);
+$('wo2').innerHTML=`<div class="card res"><h2>Brickwork · 1:${m} mortar</h2>${RR('Net wall area',f(A,2),'m²')}${RR('Masonry volume',f(V,2),'m³')}${RR('Bricks (+5% wastage)',f(bn),'nos')}${RR('Cement',f(c,1),'bags')}${RR('Sand',f(sd,2),'m³')}<button class="full s" onclick="matC('Brickwork',${bn},${c},${sd})">➕ Add to cost list</button></div>`}
+function plaster(){const a=+$('pa2').value,t=+$('pt').value/1000,m=+$('pm').value;if(!a){alert('Enter area');return}const dry=a*t*1.27,c=dry/(1+m)*1440/50,sd=dry*m/(1+m);
+$('po2').innerHTML=`<div class="card res"><h2>Plaster · ${$('pt').value} mm · 1:${m}</h2>${RR('Area',f(a,1),'m²')}${RR('Cement',f(c,1),'bags')}${RR('Sand',f(sd,2),'m³')}<button class="full s" onclick="matC('Plaster',0,${c},${sd})">➕ Add to cost list</button></div>`}
+$('gst').value=S.gst??18;
+go(0);rt();rc();rd();rm();re();rb();
+</script></body></html>
