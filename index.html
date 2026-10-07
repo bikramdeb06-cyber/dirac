@@ -30,6 +30,7 @@ nav button.on{color:var(--pri);background:var(--bg)}nav span{display:block;font-
 .gantt{overflow-x:auto}.gt{position:relative;height:26px;margin:4px 0;background:var(--bg);border-radius:6px;min-width:100%}.gt i{position:absolute;top:3px;bottom:3px;border-radius:5px;background:linear-gradient(90deg,var(--pri),var(--pri2));opacity:.9}
 .hide{display:none}
 @media print{html,body{height:auto}header,nav,main>section:not(.pp),.noprint,button,.btn{display:none!important}main{overflow:visible;padding:0}body{display:block;background:#fff;color:#000}.card{box-shadow:none;break-inside:avoid}}
+.wa{display:block;text-align:center;margin-top:10px;padding:12px;border-radius:12px;background:#25d366;color:#fff;font-weight:700;text-decoration:none}
 </style></head><body>
 <header><h1>🏗️ BuildMate</h1><p>Mix design · Schedule · Cost · Permits · Engineers</p></header>
 <main id="m">
@@ -78,6 +79,7 @@ nav button.on{color:var(--pri);background:var(--bg)}nav span{display:block;font-
 <div id="cl"></div><button class="full s" onclick="pdf('t2')">📄 Download cost report (PDF)</button></section>
 
 <section id="t3" class="hide">
+<div class="card noprint"><h2>Need help with permission?</h2><div class="mut" style="font-size:13px;color:var(--mut)">Paid professional service, handled outside the app. Chat to confirm scope and price before paying.</div><a class="wa" href="https://wa.me/918638960224?text=Hi%20BuildMate%2C%20I%20need%20help%20with%20building%20permission.%20Location%3A%20" target="_blank" rel="noopener">💬 Chat on WhatsApp</a></div>
 <div class="card"><h2>Building permission email</h2><div class="g">
 <div style="grid-column:1/3"><label>Authority email (municipality / panchayat)</label><input id="pe" type="email" placeholder="commissioner@city.gov.in"></div>
 <div><label>Owner name</label><input id="po"></div><div><label>Your email (CC copy)</label><input id="pc" type="email"></div>
@@ -89,6 +91,7 @@ nav button.on{color:var(--pri);background:var(--bg)}nav span{display:block;font-
 <div id="ml"></div></section>
 
 <section id="t4" class="hide">
+<div class="card noprint"><h2>Need a structural engineer?</h2><div class="mut" style="font-size:13px;color:var(--mut)">Paid service by us or a connected independent engineer, arranged outside the app. Chat to confirm scope and price.</div><a class="wa" href="https://wa.me/918638960224?text=Hi%20BuildMate%2C%20I%20need%20a%20structural%20engineer%20for%20my%20project.%20Location%3A%20" target="_blank" rel="noopener">💬 Chat on WhatsApp</a></div>
 <div class="card"><h2>Your project brief</h2><div class="g">
 <div><label>Scope</label><select id="es"><option>Residential building design</option><option>Structural audit / retrofit</option><option>Foundation design</option><option>Commercial / RCC frame</option><option>Drawing vetting</option></select></div>
 <div><label>Floors</label><input id="ef" type="number" value="2"></div>
